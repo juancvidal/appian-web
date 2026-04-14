@@ -73,7 +73,7 @@ export default async function Home() {
         </div>
 
         {/* Notificar */}
-        <div className="mb-4">
+        <div className="mb-8">
           <NotificarButton />
         </div>
 

@@ -1,6 +1,11 @@
 "use server";
 
-export async function notificar(): Promise<string> {
+export interface NotificarPayload {
+  email: string;
+  message: string;
+}
+
+export async function notificar(payload: NotificarPayload): Promise<string> {
   const apiKey = process.env.APPIAN_API_KEY;
   const url = process.env.APPIAN_NOTIFICAR;
 
@@ -11,8 +16,10 @@ export async function notificar(): Promise<string> {
   const response = await fetch(url, {
     method: "POST",
     headers: {
+      "Content-Type": "application/json",
       "Appian-API-Key": apiKey,
     },
+    body: JSON.stringify(payload),
     cache: "no-store",
   });
 

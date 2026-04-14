@@ -1,4 +1,4 @@
-import AppianForm from "@/app/components/AppianForm";
+import AppianFormClient from "@/app/components/AppianFormClient";
 import Navbar from "@/app/components/Navbar";
 
 export default function PortalPage() {
@@ -30,7 +30,7 @@ export default function PortalPage() {
               esta aplicación. Es ideal para exponer formularios de Appian en portales externos.
             </p>
           </div>
-          <AppianForm />
+          <AppianFormClient />
         </div>
       </main>
     </div>

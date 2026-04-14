@@ -1,5 +1,6 @@
 import VentasTable from "./components/VentasTable";
 import NotificarButton from "./components/NotificarButton";
+import Navbar from "./components/Navbar";
 import { Venta } from "./data/ventas";
 import { getVentas } from "./services/ventasService";
 
@@ -24,25 +25,14 @@ export default async function Home() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-indigo-50">
-      {/* Header */}
-      <header className="bg-white border-b border-gray-200 shadow-sm">
-        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-lg bg-indigo-600 flex items-center justify-center">
-              <span className="text-white font-bold text-sm">A</span>
-            </div>
-            <span className="text-xl font-semibold text-gray-800">AppianWeb</span>
-          </div>
-          <span className="text-sm text-gray-400">Dashboard de Ventas</span>
-        </div>
-      </header>
+      <Navbar />
 
       <main className="max-w-7xl mx-auto px-6 py-10">
         {/* Page title */}
         <div className="mb-8">
-          <h1 className="text-2xl font-bold text-gray-900">Registro de Ventas</h1>
+          <h1 className="text-2xl font-bold text-gray-900">Dashboard de Integración Appian</h1>
           <p className="text-gray-500 mt-1">
-            Consulta el historial completo de transacciones registradas en el sistema.
+            Ejemplos de integración con Appian desde una aplicación web externa usando Web APIs REST.
           </p>
         </div>
 
@@ -72,18 +62,43 @@ export default async function Home() {
           </div>
         </div>
 
-        {/* Notificar */}
+        {/* Notificar — llamada a proceso */}
         <div className="mb-8">
+          <div className="mb-3">
+            <div className="flex items-center gap-2 mb-0.5">
+              <span className="text-xs font-semibold uppercase tracking-widest text-indigo-500">Integración 1</span>
+              <span className="h-px flex-1 bg-indigo-100" />
+            </div>
+            <h2 className="text-lg font-bold text-gray-900">Llamada a proceso Appian vía Web API</h2>
+            <p className="text-sm text-gray-500 mt-1 max-w-2xl">
+              Este formulario invoca un proceso de Appian de forma externa mediante una <strong>Web API REST (POST)</strong>.
+              Al enviar, Next.js ejecuta un <em>Server Action</em> que realiza la petición al endpoint de Appian con autenticación
+              por API Key, pasando el correo y el mensaje como payload JSON. El proceso en Appian recibe los datos
+              y puede ejecutar cualquier lógica de negocio, como enviar un correo o registrar un evento.
+            </p>
+          </div>
           <NotificarButton />
         </div>
 
-        {/* Table section */}
+        {/* Table section — consulta BD vía Web API */}
         <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-6">
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="text-base font-semibold text-gray-800">Transacciones</h2>
-            <span className="text-xs text-gray-400 bg-gray-100 px-2 py-1 rounded-full">
-              Haz clic en una columna para ordenar
-            </span>
+          <div className="mb-4">
+            <div className="flex items-center gap-2 mb-0.5">
+              <span className="text-xs font-semibold uppercase tracking-widest text-emerald-500">Integración 2</span>
+              <span className="h-px flex-1 bg-emerald-100" />
+            </div>
+            <h2 className="text-lg font-bold text-gray-900">Consulta de datos desde BD de Appian vía Web API</h2>
+            <p className="text-sm text-gray-500 mt-1 max-w-2xl">
+              La tabla consume una <strong>Web API REST (GET)</strong> publicada en Appian que expone registros
+              almacenados en la base de datos de la plataforma. Next.js realiza la petición en el servidor
+              (Server Component) usando la API Key como credencial, transforma la respuesta JSON y la renderiza
+              en esta tabla con soporte de ordenamiento por columna.
+            </p>
+            <div className="flex items-center justify-end mt-3">
+              <span className="text-xs text-gray-400 bg-gray-100 px-2 py-1 rounded-full">
+                Haz clic en una columna para ordenar
+              </span>
+            </div>
           </div>
 
           {ventas.length === 0 && !errorMessage ? (
